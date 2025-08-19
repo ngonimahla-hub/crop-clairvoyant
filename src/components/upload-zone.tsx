@@ -46,6 +46,10 @@ export const UploadZone = ({ onImageUpload, uploadedImage, onClearImage }: Uploa
     [onImageUpload]
   );
 
+  const handleCardClick = useCallback(() => {
+    document.getElementById('file-input')?.click();
+  }, []);
+
   if (uploadedImage) {
     return (
       <Card className="relative overflow-hidden shadow-lg">
@@ -76,6 +80,7 @@ export const UploadZone = ({ onImageUpload, uploadedImage, onClearImage }: Uploa
       onDrop={handleDrop}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
+      onClick={handleCardClick}
     >
       <div className="flex flex-col items-center gap-4">
         <div className="p-4 rounded-full bg-primary/10">
@@ -89,18 +94,17 @@ export const UploadZone = ({ onImageUpload, uploadedImage, onClearImage }: Uploa
           </p>
         </div>
 
-        <label className="cursor-pointer">
-          <input
-            type="file"
-            accept="image/*"
-            className="hidden"
-            onChange={handleFileInput}
-          />
-          <Button variant="outline" className="flex items-center gap-2">
-            <ImageIcon className="h-4 w-4" />
-            Choose Image
-          </Button>
-        </label>
+        <input
+          id="file-input"
+          type="file"
+          accept="image/*"
+          className="hidden"
+          onChange={handleFileInput}
+        />
+        <Button variant="outline" className="flex items-center gap-2">
+          <ImageIcon className="h-4 w-4" />
+          Choose Image
+        </Button>
       </div>
     </Card>
   );
